@@ -24,6 +24,9 @@ Its purpose is to:
       - render HTML from markdown
       - remove all HTML page elements that are not rendered from markdown
       - example: [_./README.md_](https://github.com/warren-bank/crx-GitHub-display-plain-markdown/blob/greasemonkey-userscript/README.md?plain=2)
+    * `?plain=2&target=_blank`
+      - modify all anchor (&lt;a&gt;) tags in the HTML rendered from markdown&hellip; to open all links in a new browser tab
+      - example: [_./README.md_](https://github.com/warren-bank/crx-GitHub-display-plain-markdown/blob/greasemonkey-userscript/README.md?plain=2&target=_blank)
 
 #### Legal:
 

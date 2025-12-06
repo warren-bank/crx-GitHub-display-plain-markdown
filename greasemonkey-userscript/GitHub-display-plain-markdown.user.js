@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub display plain markdown
 // @description  Remove all HTML page elements that are not rendered from markdown, when viewing a markdown blob in any GitHub repo from a URL with the querystring parameter "plain=2"
-// @version      1.0.0
+// @version      1.1.0
 // @include      /^https?:\/\/(?:[^\.\/]*\.)*github\.com\/[^\/]+\/[^\/]+\/blob\/.+\.(?:md|markdown|mdown|mkdn)(\?.*)?$/
 // @icon         https://github.githubassets.com/favicons/favicon.png
 // @run-at       document-end
@@ -51,18 +51,31 @@ var process_markdown_page_content = function() {
 
   // css tweaks
   md_content.classList.remove('container-lg')
+
+  // tweak HTML attributes
+  conditionally_open_links_in_new_tab()
+}
+
+var conditionally_open_links_in_new_tab = function() {
+  var qs_regex = /[\?&]target=_?blank(?:&|$)/
+  var qs = unsafeWindow.location.search
+  if (!qs_regex.test(qs)) return
+
+  var anchors = unsafeWindow.document.querySelectorAll('a[href]')
+  for (var i=0; i < anchors.length; i++) {
+    anchors[i].setAttribute('target', '_blank')
+  }
 }
 
 // ----------------------------------------------------------------------------- bootstrap
 
 var init = function() {
-  var qs_regex = /[\?&]plain=2&?/
+  var qs_regex = /[\?&]plain=2(?:&|$)/
   var qs = unsafeWindow.location.search
+  if (!qs_regex.test(qs)) return
 
-  if (qs_regex.test(qs)) {
-    add_default_trusted_type_policy()
-    process_markdown_page_content()
-  }
+  add_default_trusted_type_policy()
+  process_markdown_page_content()
 }
 
 init()
