@@ -27,6 +27,12 @@ Its purpose is to:
     * `?plain=2&target=_blank`
       - modify all anchor (&lt;a&gt;) tags in the HTML rendered from markdown&hellip; to open all links in a new browser tab
       - example: [_./README.md_](https://github.com/warren-bank/crx-GitHub-display-plain-markdown/blob/greasemonkey-userscript/README.md?plain=2&target=_blank)
+    * `?plain=2&target=_blank&padding=<value>`
+      - modify body tag to specify padding on HTML page
+      - format of `value`:
+        * any value that is valid for: `document.body.style.padding = value`
+        * an integer =&gt; `${value}px`
+      - example: [_./README.md_](https://github.com/warren-bank/crx-GitHub-display-plain-markdown/blob/greasemonkey-userscript/README.md?plain=2&target=_blank&padding=20)
 
 #### Legal:
 

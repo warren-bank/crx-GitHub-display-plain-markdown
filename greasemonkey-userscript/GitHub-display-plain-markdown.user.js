@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub display plain markdown
 // @description  Remove all HTML page elements that are not rendered from markdown, when viewing a markdown blob in any GitHub repo from a URL with the querystring parameter "plain=2"
-// @version      1.1.0
+// @version      1.2.0
 // @include      /^https?:\/\/(?:[^\.\/]*\.)*github\.com\/[^\/]+\/[^\/]+\/blob\/.+\.(?:md|markdown|mdown|mkdn)(\?.*)?$/
 // @icon         https://github.githubassets.com/favicons/favicon.png
 // @run-at       document-end
@@ -51,9 +51,25 @@ var process_markdown_page_content = function() {
 
   // css tweaks
   md_content.classList.remove('container-lg')
+  conditionally_change_body_padding()
 
   // tweak HTML attributes
   conditionally_open_links_in_new_tab()
+}
+
+var conditionally_change_body_padding = function() {
+  var qs_regex = /[\?&]padding=([^&]+)(?:&|$)/
+  var qs = unsafeWindow.location.search
+  var match = qs_regex.exec(qs)
+  if (!match || !match[1]) return
+
+  var padding = decodeURIComponent(match[1])
+
+  if (/^\d+$/.test(padding))
+    padding = padding + 'px'
+
+  var body = unsafeWindow.document.body
+  body.style.padding = padding
 }
 
 var conditionally_open_links_in_new_tab = function() {
