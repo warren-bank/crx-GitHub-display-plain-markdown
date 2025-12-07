@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         GitHub display plain markdown
 // @description  Remove all HTML page elements that are not rendered from markdown, when viewing a markdown blob in any GitHub repo from a URL with the querystring parameter "plain=2"
-// @version      1.2.0
+// @version      1.2.1
 // @include      /^https?:\/\/(?:[^\.\/]*\.)*github\.com\/[^\/]+\/[^\/]+\/blob\/.+\.(?:md|markdown|mdown|mkdn)(\?.*)?$/
 // @icon         https://github.githubassets.com/favicons/favicon.png
-// @run-at       document-end
+// @run-at       document-idle
 // @homepage     https://github.com/warren-bank/crx-GitHub-display-plain-markdown/tree/greasemonkey-userscript
 // @supportURL   https://github.com/warren-bank/crx-GitHub-display-plain-markdown/issues
 // @downloadURL  https://github.com/warren-bank/crx-GitHub-display-plain-markdown/raw/greasemonkey-userscript/greasemonkey-userscript/GitHub-display-plain-markdown.user.js
